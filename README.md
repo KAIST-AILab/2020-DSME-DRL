@@ -7,7 +7,7 @@ https://visualstudio.microsoft.com/visual-cpp-build-tools/
 에서 Microsoft C++ Build Tools를 다운로드하여 'Visual C++ 빌드 도구'를 설치. 이후 Anaconda Powershell prompt에서 'env_install.ps1' 스크립트 실행:
 
 ```
-(base) PS C:\Users\user1\2020-DSME-DRL-main> env_install.ps1
+(base) PS C:\Users\user1\2020-DSME-DRL-main> .\env_install.ps1
 ```
 
 
