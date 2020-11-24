@@ -174,7 +174,7 @@ if __name__ == "__main__":
     val_func = NNValueFunction(obs_dim)
     # sess.run(tf.compat.v1.initializers.global_variables())
 
-    now = datetime.utcnow().strftime("%b-%d_%H:%M:%S")  # create unique directories
+    now = datetime.utcnow().strftime("%b-%d_%H%M%S")  # create unique directories
     logger = Logger(logname=env_name, now=now)
 
     scaler = Scaler(obs_dim)
