@@ -7,9 +7,9 @@ https://visualstudio.microsoft.com/visual-cpp-build-tools/
 에서 Microsoft C++ Build Tools를 다운로드하여 'Visual C++ 빌드 도구'를 설치. 이후 Anaconda Prompt에서 다음 명령어 실행:
 
 ```
-(base) C:\Users\user1\2020-DSME-DRL-main> conda env create -f environment.yml
-(base) C:\Users\user1\2020-DSME-DRL-main> conda activate rl
-(base) C:\Users\user1\2020-DSME-DRL-main> .\env_install.bat
+(base) C:\Users\user1\2020-DSME-DRL> conda env create -f environment.yml
+(base) C:\Users\user1\2020-DSME-DRL> conda activate rl
+(base) C:\Users\user1\2020-DSME-DRL> .\env_install.bat
 ```
 
 
