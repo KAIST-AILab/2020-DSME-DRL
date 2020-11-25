@@ -1,3 +1,4 @@
+import time
 import gym
 import numpy as np
 import tensorflow as tf
@@ -79,7 +80,7 @@ class Policy(object):
 
 
 
-def run_episode(env, policy, scaler):
+def run_episode(env, policy, scaler, animate=False, sleep=None):
 
     obs = env.reset()
     observes, actions, rewards, unscaled_obs = [], [], [], []
@@ -89,7 +90,10 @@ def run_episode(env, policy, scaler):
     scale[-1] = 1.0  # don't scale time step feature
     offset[-1] = 0.0  # don't offset time step feature
     while not done:
-
+        if animate:
+            env.render()
+            if sleep:
+                time.sleep(sleep)
         obs = obs.astype(np.float32).reshape((1, -1))
         obs = np.append(obs, [[step]], axis=1)  # add time step feature
         unscaled_obs.append(obs)
@@ -124,6 +128,7 @@ def run_policy(env, policy, scaler, logger, episodes):
                 'Steps': total_steps})
 
     return trajectories
+
 
 def discount(x, gamma):
     """ Calculate discounted forward sum of a sequence at each point """
@@ -165,6 +170,8 @@ if __name__ == "__main__":
     batch_size = 5
 
     env = gym.make(env_name)
+    viz_env = gym.make(env_name)
+    viz_env.render()
     obs_dim = env.observation_space.shape[0]
     obs_dim += 1 # add 1 to obs dimension for time step feature (see run_episode())
     act_dim = env.action_space.shape[0]
@@ -190,3 +197,7 @@ if __name__ == "__main__":
             '_Episode': episode,
         })
         logger.write(display=True)
+        
+        # visualize current policy
+        for _ in range(1):
+            run_episode(viz_env, policy, scaler, animate=True, sleep=0.01)
