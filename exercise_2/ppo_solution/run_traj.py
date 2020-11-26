@@ -27,8 +27,8 @@ class Policy(tf.layers.Layer):
         hid1_size = 64
         hid2_size = 64
         # 2 hidden layers with tanh activations
-        h1 = tf.keras.layers.Dense(hid1_size)(self.obs_ph)
-        h2 = tf.keras.layers.Dense(hid2_size)(h1)
+        h1 = tf.keras.layers.Dense(hid1_size, activation='tanh')(self.obs_ph)
+        h2 = tf.keras.layers.Dense(hid2_size, activation='tanh')(h1)
         means = tf.keras.layers.Dense(act_dim)(h2)
         ########################
 
