@@ -4,7 +4,6 @@ import gym
 import tensorflow as tf
 import pybulletgym
 
-
 class Policy(tf.layers.Layer):
     """ NN-based policy approximation """
     def __init__(self, obs_dim, act_dim):
@@ -44,14 +43,23 @@ class Policy(tf.layers.Layer):
 if __name__ == "__main__":
 
     env_name = 'MountainCarContinuous-v0'
+    #env_name = 'InvertedPendulumPyBulletEnv-v0'
+    #env_name = 'AntPyBulletEnv-v0'
+    #env_name = 'HalfCheetahPyBulletEnv-v0'
 
     """
     STEP 2
     Run one episode with random policy, Store observations, actions, rewards in the list
     """
     env = gym.make(env_name)
+    env.render()
     obs_dim = env.observation_space.shape[0]
     act_dim = env.action_space.shape[0]
+
+    print('env_name: ', env_name)
+    print('obs_dim: ', obs_dim)
+    print('act_dim: ', act_dim)
+
     policy = Policy(obs_dim, act_dim)
 
     obs = env.reset()
@@ -65,11 +73,12 @@ if __name__ == "__main__":
         observes.append(obs)
         actions.append(act)
         rewards.append(reward)
+        env.render()
         ########################
 
     accumulated_reward = np.sum(rewards)
     print("======================================")
-    print(f"During one episodes, The accumulated Rewards: {accumulated_reward}")
+    print(f"During one episode, The accumulated reward: {accumulated_reward}")
     print("======================================")
 
     """
@@ -84,12 +93,13 @@ if __name__ == "__main__":
         done = False
         accumulated_reward = 0
         # For one episode
-        for t in range(10000):
+        for t in range(1000):
             ########################
             # YOUR IMPLEMENTATION PART
             act = policy.sample(obs)
             obs, reward, done, _ = env.step(act)
             accumulated_reward += reward
+            env.render()
             ########################
 
             if done:
@@ -98,5 +108,5 @@ if __name__ == "__main__":
 
     avg_returns = np.mean(returns)
     print("======================================")
-    print(f"During 10 episodes, The average of accumulated Rewards: {avg_returns}")
+    print(f"During 10 episodes, The average of accumulated reward: {avg_returns}")
     print("======================================")
